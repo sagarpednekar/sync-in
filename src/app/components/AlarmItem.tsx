@@ -1,12 +1,13 @@
-import { CiAlarmOn } from "react-icons/ci";
-import { Alarm } from "../hooks/useClock";
 import { useEffect, useRef, useState } from "react";
+import { CiAlarmOn } from "react-icons/ci";
+import { Alarm } from "@/app/hooks/useClock";
+import SVGClock from "@/app/components/SVGClock";
+
 
 type AlarmItemProps = Omit<Alarm, "id"> & {
     getZonedTime: (timezone: string, timeFormat?: string) => string;
+    getZonedDate: (timezone: string) => Date
 };
-
-
 
 export default function AlarmItem({
     timeZone,
@@ -14,8 +15,7 @@ export default function AlarmItem({
     getZonedTime,
 
 }: AlarmItemProps) {
-    const [showSnoozeBtn, setShowSnoozeBtn] = useState(false)
-
+    const [showSnoozeBtn, setShowSnoozeBtn] = useState(false);
     const currentTime = getZonedTime(timeZone.timezone, 'H:mm a');
     const alarmTime = time.toLocaleUpperCase()
     const audioRef = useRef<HTMLAudioElement>(null)
@@ -37,23 +37,34 @@ export default function AlarmItem({
 
         }
     }, [currentTime, alarmTime])
+
     return (
         <div>
             <div className="flex flex-col items-center gap-2  border-gray-600 border-y-1 p-4">
+
+               {/*  Audio File element */}
                 <audio
                     ref={audioRef}
                     src="/audio/alarm.wav"
                     preload="auto"
                     loop
                 />
-                <div className="text-2xl font-bold">
-                    {getZonedTime(timeZone.timezone)}
+
+                {/* Clock Component  */}
+
+                <SVGClock timezone={timeZone.timezone} />
+                <div className="text-3xl text-amber-300 font-extrabold">
+                    {timeZone.city}
                 </div>
-                <div className="flex justify-center items-center gap-1">
+                <div className="flex justify-center items-center gap-1 text-xl">
                     <CiAlarmOn /> <span>{alarmTime}</span>
                 </div>
+                <div className="flex gap-2 justify-center items-center text-xl font-bold">
+                    <div>{timeZone.country}</div>
+                </div>
 
-                <div>{timeZone.timezone}</div>
+
+
                 {showSnoozeBtn ? <button
                     onClick={() => {
                         if (audioRef.current) {

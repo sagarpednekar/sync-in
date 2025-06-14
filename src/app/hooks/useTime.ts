@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { useEffect, useState } from "react";
 
-export  function useTime() {
+export function useTime() {
     const [currentTime, setCurrentTime] = useState(new Date());
 
 
@@ -17,12 +17,17 @@ export  function useTime() {
         return format(toZonedTime(currentTime, timezone), timeFormat)
     }
 
+    const getZonedDate = (timezone: string) => {
+        return toZonedTime(currentTime, timezone)
+    }
+
 
 
     return {
         // data
         currentTime,
         // methods
-        getZonedTime
+        getZonedTime,
+        getZonedDate
     }
 }

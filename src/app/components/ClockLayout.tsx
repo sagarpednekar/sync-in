@@ -12,7 +12,7 @@ export default function ClockLayout() {
     };
     const { alarms, ...rest } = useClock();
     const clockState = { alarms, ...rest };
-    const { getZonedTime } = useTime();
+    const { getZonedTime,getZonedDate } = useTime();
 
 
     return (
@@ -38,7 +38,7 @@ export default function ClockLayout() {
                         />
                     </>
                 ) : (
-                    <AlarmList alarms={alarms} getZonedTime={getZonedTime} />
+                    <AlarmList alarms={alarms} getZonedTime={getZonedTime} getZonedDate={getZonedDate}/>
                 )}
             </div>
         </div>
