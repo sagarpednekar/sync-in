@@ -1,6 +1,6 @@
 "use client";
-import { Alarm, useClock } from "@/app/hooks/useClock";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Alarm } from "@/app/hooks/useClock";
+import { Dispatch, SetStateAction } from "react";
 
 export type TimezoneLocation = { timezone: string; city: string; country: string };
 
@@ -12,12 +12,12 @@ interface AddAlarmProps {
   ampmlist: Array<{ label: string; value: string }>;
   timeZone: { city: string; country: string; timezone: string };
   timezones: string[];
-  alarms: Array<any>;
+  alarms: Array<Alarm>;
   setHour: (value: number) => void;
   setMinutes: (value: number) => void;
   setAmPm: (value: string) => void;
   setTimeZone: Dispatch<SetStateAction<{ timezone: string; city: string; country: string; }>>;
-  setAlarms: (value: any) => void;
+  setAlarms: (value: Alarm[]) => void;
   getZonedTime: (timezone: string) => string;
 }
 
@@ -59,7 +59,7 @@ export default function AddAlarm({
       enabled: true,
     };
 
-    setAlarms((prev: Alarm[]) => [...prev, newAlarm]);
+    setAlarms([...alarms, newAlarm]);
     onSave(false);
   };
 

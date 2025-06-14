@@ -1,6 +1,6 @@
 "use client";
 
-import { Alarm, useClock } from "@/app/hooks/useClock";
+import { Alarm } from "@/app/hooks/useClock";
 import AlarmItem from "./AlarmItem";
 
 
