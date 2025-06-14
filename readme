@@ -26,5 +26,5 @@ A Next.js application that lets you set alarms for different timezones while liv
 
 ## Getting Started
 1. Clone repo
-2. `pnpm install`
-3. `pnpm dev`
+2. `npm install`
+3. `npm run dev`
