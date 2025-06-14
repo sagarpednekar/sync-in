@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useClock } from "@/app/hooks/useClock";
 import { useTime } from "../hooks/useTime";
 
-export default function ClockLayout({ }: {}) {
+export default function ClockLayout() {
     const [showAlarmForm, setShowAlarmForm] = useState(false);
     const handleAddClick = () => {
         setShowAlarmForm(true);
